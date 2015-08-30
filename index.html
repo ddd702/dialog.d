@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>demo</title>
+    <meta charset="utf-8">
+    <style type="text/css" id="d-style">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+    }
+    .d-dialog-mask{
+    	background-color:rgba(0, 0, 0, 0.5);
+    	position:fixed;
+    	top:0;
+    	left:0;
+    	z-index:100;
+    	width:100%;
+    	height:100%;
+    }
+    .d-dialog-box{
+    	background-color:#fff;
+    	position:fixed;
+    	z-index:110;
+    	top:10%;
+    	left:50%;
+    	margin-left:-100px;
+    	width:200px;
+    	padding:10px;
+
+    }
+    </style>
+</head>
+
+<body>
+    <button id="j-delClick">解绑事件</button>
+    <script type="text/javascript" src="dialog.d.js"></script>
+    <script type="text/javascript">
+    var utils = D.utils;
+    var request = utils.getRequest();
+    var delBtn = document.querySelector('#j-delClick');
+    console.log(request['ddd']);
+    var bodyClick = function(e) {
+        console.log(e.target);
+    }
+    var delBodyClick = function(e) {
+    	e.stopPropagation();
+        utils.delEvent(document.body, 'click', bodyClick);
+        console.log('ok');
+    }
+    utils.setEvent(document.body, 'click', bodyClick);
+    utils.setEvent(delBtn, 'click', delBodyClick);
+    </script>
+</body>
+
+</html>
