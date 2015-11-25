@@ -1,7 +1,7 @@
 /**
  * 
  * @author ddd
- * @version 0.0.1 beta
+ * @version 1.0.0 beta
  * @githud https://github.com/ddd702/dialog.d
  * @created 2015.8.30
  * 
@@ -150,7 +150,6 @@
         var confirmTpl = dialog.tpl.confirm;
         var opt = utils.extend(dialog.config.confirm, param);
         dialog.createMask();
-
         function rmConfirm() {
             dialog.removeMask();
             document.body.removeChild(confirmEle);
@@ -217,14 +216,14 @@
             notifyEle.innerHTML = utils.render(notifyTpl, opt);
             document.body.appendChild(notifyEle);
         } else {
-            notifyEle.className = opt.operate ? 'd-show' : 'd-dialog-box d-show';
+            notifyEle.className = opt.operate ? 'd-show d-notify-box' : 'd-dialog-box d-notify-box d-show';
             notifyEle.querySelectorAll('.d-notify-con')[0].innerHTML = con;
         }
         opt.fn();
         if (opt.autoRm) {
             clearTimeout(D.dialog.notifyTimer);
             D.dialog.notifyTimer = setTimeout(function() {
-                notifyEle.className = opt.operate ? 'd-hide' : 'd-dialog-box d-hide';
+                notifyEle.className = opt.operate ? 'd-hide d-notify-box' : 'd-dialog-box d-notify-box d-hide';
             }, opt.rmTime);
         }
     };
@@ -232,13 +231,19 @@
         var notifyEle = document.querySelector('#D-notify');
         if (notifyEle) {
             clearTimeout(D.dialog.notifyTimer);
-            notifyEle.className = 'd-dialog-box d-hide';
+            notifyEle.className = 'd-dialog-box  d-notify-box d-hide';
         }
        
     };
     D.utils = { //工具类
-        version: '0.0.1',
+        version: '1.0.0',
         parent: this,
+        dateStamp:function(date){
+            if (!date) {
+                var date=new Date().getTime();
+            }
+            return new Date(date).getTime();
+        },
         dateFormat: function(timestamp, format) {
             var date = new Date(parseInt(timestamp, 10)),
                 o = {
@@ -340,9 +345,11 @@
              * @param  {params} [传入参数序列,如:name=ddd&age=24&sex=1,默认window.location.search.replace('?', '');]
              * @return {[array]}  [返回一个参数数组]
              */
-            if (typeof params === undefined || params === null || typeof window === 'object') { //在浏览器端默认是？后面的参数
+            console.log(params);
+            if (!params) { //在浏览器端默认是？后面的参数
                 params = window.location.search.replace('?', '');
             }
+            
             var url = params; //获取url中"?"符后的字串
             var theRequest = new Object();
             var str = url;
@@ -397,6 +404,38 @@
             node.innerHTML = str;
             node.type = "text/css";
             head.appendChild(node);
+        },
+        loadCss: function(url, callback) { //异步加载css样式
+            /**
+             * @param {[string,function]} [url, callback] [css的路径,回调函数]
+             */
+            var doc = document,
+                head = doc.head || doc.getElementsByTagName("head")[0] || doc.documentElement,
+                baseElement = head.getElementsByTagName("base")[0],
+                node = doc.createElement("link"),
+                supportOnload = "onload" in node;
+
+            if (supportOnload) {
+                node.onload = onload;
+                node.onerror = function() {
+                    onload('error');
+                };
+            } else {
+                node.onreadystatechange = function() {
+                    if (/loaded|complete/.test(node.readyState)) {
+                        onload();
+                    }
+                };
+            }
+            node.rel = "stylesheet";
+            node.href = url;
+            baseElement ? head.insertBefore(node, baseElement) : head.appendChild(node);
+
+            function onload(error) {
+                node.onload = node.onerror = node.onreadystatechange = null;
+                node = null;
+                callback && callback(error);
+            };
         },
         supportCss3: function(style) { //是否支持某css3特性,如transform,box-shadow
             var prefix = ['webkit', 'Moz', 'ms', 'o'],
