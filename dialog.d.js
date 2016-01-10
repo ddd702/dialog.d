@@ -458,6 +458,13 @@
             }
             return false;
         },
+        byteConvert = function(bytes) {
+            if (bytes <1000) return bytes+'B';
+            var k = 1000, // 1024
+                sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                i = Math.floor(Math.log(bytes) / Math.log(k));
+            return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+        },
         viewUploadImage: function(inputEle, imgCell) {
             /**
              * @description ['实时预览上传的图片,支持流行浏览器']
