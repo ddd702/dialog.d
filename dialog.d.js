@@ -54,7 +54,7 @@
                 },
                 fnN: function(t) {
                     console.log('你按了取消');
-                    return false;
+                    return true;
                 },
                 inputType: 'text',
                 defaultVal: '',
@@ -193,14 +193,17 @@
         document.body.appendChild(promptEle);
         utils.setEvent(promptEle.querySelector('#D-prompt-y'), 'click', function(e) {
             e.stopPropagation();
-            rmPrompt();
             var val = promptEle.querySelectorAll('.d-dialog-input')[0].value;
-            opt.fnY(val);
+            if(opt.fnY(val)!==false){rmPrompt();}
+            
         });
         utils.setEvent(promptEle.querySelector('#D-prompt-n'), 'click', function(e) {
             e.stopPropagation();
-            rmPrompt();
-            opt.fnN();
+            if(opt.fnN()!==false){
+                 rmPrompt();
+             }
+           
+           
         });
     };
     D.notify = function(con, param) {
