@@ -461,7 +461,7 @@
             }
             return false;
         },
-        byteConvert = function(bytes) {
+        byteConvert : function(bytes) {
             if (bytes <1000) return bytes+'B';
             var k = 1000, // 1024
                 sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
