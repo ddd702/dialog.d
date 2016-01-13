@@ -54,7 +54,7 @@
                 },
                 fnN: function(t) {
                     console.log('你按了取消');
-                    return false;
+                    return true;
                 },
                 inputType: 'text',
                 defaultVal: '',
@@ -193,14 +193,17 @@
         document.body.appendChild(promptEle);
         utils.setEvent(promptEle.querySelector('#D-prompt-y'), 'click', function(e) {
             e.stopPropagation();
-            rmPrompt();
             var val = promptEle.querySelectorAll('.d-dialog-input')[0].value;
-            opt.fnY(val);
+            if(opt.fnY(val)!==false){rmPrompt();}
+            
         });
         utils.setEvent(promptEle.querySelector('#D-prompt-n'), 'click', function(e) {
             e.stopPropagation();
-            rmPrompt();
-            opt.fnN();
+            if(opt.fnN()!==false){
+                 rmPrompt();
+             }
+           
+           
         });
     };
     D.notify = function(con, param) {
@@ -457,6 +460,13 @@
                 }
             }
             return false;
+        },
+        byteConvert = function(bytes) {
+            if (bytes <1000) return bytes+'B';
+            var k = 1000, // 1024
+                sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                i = Math.floor(Math.log(bytes) / Math.log(k));
+            return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
         },
         viewUploadImage: function(inputEle, imgCell) {
             /**
