@@ -5,8 +5,304 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Dialog.d by ddd702</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/dialog.d.css">
+    <style>
+        body {
+            padding: 50px;
+            font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #777;
+            font-weight: 300;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #222;
+            margin: 0 0 20px;
+        }
+        
+        p,
+        ul,
+        ol,
+        table,
+        pre,
+        dl {
+            margin: 0 0 20px;
+        }
+        
+        h1,
+        h2,
+        h3 {
+            line-height: 1.1;
+        }
+        
+        h1 {
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #393939;
+        }
+        
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #494949;
+        }
+        
+        a {
+            color: #39c;
+            font-weight: 400;
+            text-decoration: none;
+        }
+        
+        a small {
+            font-size: 11px;
+            color: #777;
+            margin-top: -0.6em;
+            display: block;
+        }
+        
+        .wrapper {
+            width: 860px;
+            margin: 0 auto;
+        }
+        
+        .view-upload {
+            max-width: 200px;
+        }
+        
+        blockquote {
+            border-left: 1px solid #e5e5e5;
+            margin: 0;
+            padding: 0 0 0 20px;
+            font-style: italic;
+        }
+        
+        code,
+        pre {
+            font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+            color: #333;
+            font-size: 12px;
+        }
+        
+        pre {
+            padding: 8px 15px;
+            background: #f8f8f8;
+            border-radius: 5px;
+            border: 1px solid #e5e5e5;
+            overflow-x: auto;
+            margin-bottom: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 5px 10px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        dt {
+            color: #444;
+            font-weight: 700;
+        }
+        
+        th {
+            color: #444;
+        }
+        
+        img {
+            max-width: 100%;
+        }
+        
+        header {
+            width: 270px;
+            float: left;
+            position: fixed;
+        }
+        
+        header ul {
+            list-style: none;
+            height: 40px;
+            padding: 0;
+            background: #eee;
+            background: -moz-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f8f8f8), color-stop(100%, #dddddd));
+            background: -webkit-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+            background: -o-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+            background: -ms-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+            background: linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+            border-radius: 5px;
+            border: 1px solid #d2d2d2;
+            box-shadow: inset #fff 0 1px 0, inset rgba(0, 0, 0, 0.03) 0 -1px 0;
+            width: 100px;
+        }
+        
+        header li {
+            width: 89px;
+            float: left;
+            height: 40px;
+        }
+        
+        header ul a {
+            line-height: 1;
+            font-size: 11px;
+            color: #999;
+            display: block;
+            text-align: center;
+            padding-top: 6px;
+            height: 40px;
+        }
+        
+        strong {
+            color: #222;
+            font-weight: 700;
+        }
+        
+        header ul li+li {
+            width: 88px;
+            border-left: 1px solid #fff;
+        }
+        
+        header ul li+li+li {
+            border-right: none;
+            width: 89px;
+        }
+        
+        header ul a strong {
+            font-size: 14px;
+            display: block;
+            color: #222;
+        }
+        
+        section {
+            width: 500px;
+            float: right;
+            padding-bottom: 50px;
+        }
+        
+        small {
+            font-size: 11px;
+        }
+        
+        hr {
+            border: 0;
+            background: #e5e5e5;
+            height: 1px;
+            margin: 0 0 20px;
+        }
+        
+        footer {
+            width: 270px;
+            float: left;
+            position: fixed;
+            bottom: 50px;
+        }
+        
+        @media print,
+        screen and (max-width: 960px) {
+            div.wrapper {
+                width: auto;
+                margin: 0;
+            }
+            header,
+            section,
+            footer {
+                float: none;
+                position: static;
+                width: auto;
+            }
+            header {
+                padding-right: 320px;
+            }
+            section {
+                border: 1px solid #e5e5e5;
+                border-width: 1px 0;
+                padding: 20px 0;
+                margin: 0 0 20px;
+            }
+            header a small {
+                display: inline;
+            }
+            header ul {
+                position: absolute;
+                right: 50px;
+                top: 52px;
+            }
+        }
+        
+        @media print,
+        screen and (max-width: 720px) {
+            body {
+                word-wrap: break-word;
+            }
+            header {
+                padding: 0;
+            }
+            header ul,
+            header p.view {
+                position: static;
+            }
+            pre,
+            code {
+                word-wrap: normal;
+            }
+        }
+        
+        @media print,
+        screen and (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            header ul {
+                display: none;
+            }
+        }
+        
+        @media print {
+            body {
+                padding: 0.4in;
+                font-size: 12pt;
+                color: #444;
+            }
+        }
+        
+        .content {}
+        
+        .code-box {
+            resize: none;
+        }
+        
+        .title {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .cell {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+        }
+        
+        .btn {
+            color: #777;
+            display: inline-block;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px 15px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="dialog.d.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -28,12 +324,12 @@
             <a href="javacript:void(0)" id="j-run" class="btn btn-main">运行</a>
             <h2>demo</h2>
             <div class="cell">
-              <p class="title">alert用法</p>
-              <pre>D.alert('ddd')</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <p class="title">alert用法</p>
+                <pre>D.alert('ddd',function(){alert('ddd')})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
             </div>
             <div class="cell">
-              <p class="title">notify用法</p>
-              <pre>默认配置
+                <p class="title">notify用法</p>
+                <pre>默认配置
                   {
                     rmTime: 3000, //消失时间，单位毫秒
                     autoRm: true, //是否自动消失,false为一直显示
@@ -41,19 +337,19 @@
                     fn: function() {} //同时执行的回调
                   }
               </pre>
-              <p>1.一般用法</p>
-              <pre>D.notify('ddd')</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
-              <p>2.根据配置diy</p>
-              <pre>D.notify('你好',{rmTime:5000,fn:function(){console.log('好')}})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
-              <pre>D.notify('你好',{rmTime:5000,operate:false})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
-              <p>3.不自动消失的notify</p>
-              <pre>D.notify('你好',{autoRm:false})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
-              <p>4.清除notify</p>
-              <pre>D.rmNotify()</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <p>1.一般用法</p>
+                <pre>D.notify('ddd')</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <p>2.根据配置diy</p>
+                <pre>D.notify('你好',{rmTime:5000,fn:function(){console.log('好')}})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <pre>D.notify('你好',{rmTime:5000,operate:false})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <p>3.不自动消失的notify</p>
+                <pre>D.notify('你好',{autoRm:false})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <p>4.清除notify</p>
+                <pre>D.rmNotify()</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
             </div>
             <div class="cell">
-              <p class="title">confirm用法</p>
-              <pre>默认配置
+                <p class="title">confirm用法</p>
+                <pre>默认配置
                   {
                     title: '',
                     content: '你确定？',
@@ -69,12 +365,12 @@
                     }
                   }
               </pre>
-              <p>1.一般用法</p>
-              <pre>D.confirm({title:'标题',content:'你选择？'})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <p>1.一般用法</p>
+                <pre>D.confirm({title:'标题',content:'你选择？'})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
             </div>
             <div class="cell">
-              <p class="title">prompt用法</p>
-              <pre>默认配置
+                <p class="title">prompt用法</p>
+                <pre>默认配置
               {
                   title: '',
                   content: '填入信息',
@@ -90,12 +386,148 @@
                   }
                 }
               </pre>
-              <p>1.一般用法</p>
-              <pre>D.prompt({title:'标题',content:'你的姓名',fnY:function(t){
+                <p>1.一般用法</p>
+                <pre>D.prompt({title:'标题',content:'你的姓名',fnY:function(t){
                 D.alert('你好!'+t)
               },fnN:function(t){
                 D.alert('为啥按取消呢');
               }})</pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.arrUniq</p>
+                <p>去除数组中的相同元素，不支持对象数组</p>
+                <pre>var a=[1,1,1,2,2,323,243,545,45,45,5,1,2,'你好','的','你好'];
+console.log(D.utils.arrUniq(a))
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.byteConvert</p>
+                <p>byte单位转换</p>
+                <pre>D.alert(D.utils.byteConvert(1212121212));
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.timeFormat</p>
+                <p>输入微秒数（1000微秒=1秒），输出格式化对象</p>
+                <pre>console.log(D.utils.timeFormat(13233000));
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.createStyle</p>
+                <p>异步向页面添加样式</p>
+                <pre>D.utils.createStyle('body{background:#333;color:#fff}');
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.dateFormat</p>
+                <p>将时间戳传入，按设置的时间格式返回</p>
+                <pre>var b=D.utils.dateFormat(new Date().getTime(),'yyyy-MM-dd hh:mm:ss');
+D.alert('现在时间：'+b);
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.indexOfArr</p>
+                <p>返回val在arr数组中最后出现的坐标</p>
+                <pre>
+                    var a='你是什么人啊你个混蛋？'.split('');
+                    var b=D.utils.indexOfArr('你',a);
+                    D.alert('你在的位置是：'+b);
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.getWeek</p>
+                <p>传入时间戳返回该时间戳是周几</p>
+                <pre>var a=D.utils.getWeek(new Date().getTime());
+D.alert(a)
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.extend</p>
+                <p>对象的浅度合并，推荐使用es6的Object.assign</p>
+                <pre>var a=D.utils.extend({a:'bc',name:'ddd'},{name:'邓',age:26});
+console.log(a)
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.clone</p>
+                <p>对象的浅度克隆</p>
+                <pre>var b={name:'邓',age:26}
+var a=D.utils.clone(b);
+console.log(a)
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.render</p>
+                <p>类似underscore的_.template函数，请将下面代码copy到控制台运行</p>
+                <pre>
+var data={a:['ddd','213','煞笔']};
+var str=`<&a.forEach(function(el,index){&><&=index&>:<&=el&><&});&>`;
+var b=D.utils.render(str,data);
+document.querySelector('#j-render').innerHTML=b;
+                </pre>
+                <div id='j-render'></div>
+            </div>
+            <div class="cell">
+                <p class="title">utils.getRequest</p>
+                <p>获取url上的参数</p>
+                <p>1.获取传入的url上的参数</p>
+                <pre>var b='ie=UTF-8&tn=92821989_s_hao_pg=&wd=jquery%20ajax';
+console.log(D.utils.getRequest(b))
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <p>2.获取本url上的参数</p>
+                <pre>
+console.log(D.utils.getRequest())
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.browserVer</p>
+                <p>获取浏览器信息</p>
+                <pre>
+    { //移动终端浏览器版本信息
+        chrome: u.indexOf('Chrome') > -1,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webkit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+        iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+        iPad: u.indexOf('iPad') > -1, //是否iPad
+        webApp: u.indexOf('Safari') === -1, //是否web应该程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') > -1, //is weixin browser
+        info: u //返回完整的userAgent信息
+    }
+                </pre>
+                <p>判断是否是android浏览器</p>
+                <pre>D.alert(D.utils.browserVer.android)
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+            </div>
+            <div class="cell">
+                <p class="title">utils.setCookie,utils.getCookie</p>
+                <p>cookie的操作</p>
+                <pre>
+    D.utils.setCookie('name','ddd');
+    var a=D.utils.getCookie('name');
+    D.alert(a);
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
+                <div id='j-render'></div>
+            </div>
+            <div class="cell">
+                <p class="title">utils.viewUploadImage</p>
+                <p>图片文件的预览</p>
+                <input type="file" name="viewUploadImageFile" value="">
+                <div class="view-upload j-viewImg">
+                    <img src='' />
+                </div>
+                <pre>D.notify('现在可以点击选择文件按钮上传图片了！')
+var a=document.querySelector('[name="viewUploadImageFile"]');
+var b=document.querySelector('.j-viewImg img');
+a.addEventListener('change',function(){
+    D.utils.viewUploadImage(a,b);
+});
+
+                </pre><a href="javacript:void(0)" class="btn btn-main j-run">运行</a>
             </div>
         </section>
         <footer>
@@ -103,22 +535,20 @@
             <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
         </footer>
     </div>
-    <script src="javascripts/dialog.d.js"></script>
+    <script src="dialog.d.js"></script>
     <script type="text/javascript">
-    D.utils.setEvent(document.querySelector('#j-run'), 'click', function(e) {
-        var code = document.querySelector('#j-code').value;
-        console.log(code);
-        eval(code);
-    });
-    /*document.querySelectorAll('.j-run').forEach(function(itm,index){
-      console.log(itm);
-    });*/
-    var runBtns= document.querySelectorAll('.j-run');
-    for (var i = 0; i < runBtns.length; i++) {
-      D.utils.setEvent(runBtns[i], 'click', function(e) {
-        eval(this.previousSibling.innerHTML);
-      });
-    }
+        D.utils.setEvent(document.querySelector('#j-run'), 'click', function(e) {
+            var code = document.querySelector('#j-code').value;
+            console.log(code);
+            eval(code);
+        });
+        var runBtns = document.querySelectorAll('.j-run');
+        for (var i = 0; i < runBtns.length; i++) {
+            D.utils.setEvent(runBtns[i], 'click', function(e) {
+                console.log(this.previousSibling.innerHTML)
+                eval(this.previousSibling.innerHTML);
+            });
+        }
     </script>
 </body>
 
