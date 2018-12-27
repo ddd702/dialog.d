@@ -1,11 +1,11 @@
 /**
  * 
  * @author ddd
- * @version 1.0.0 beta
+ * @version 1.0.1 beta
  * @githud https://github.com/ddd702/dialog.d
  * @created 2015.8.30
- * 
- */
+ * @update 2018.12.27
+ * */
 D = {}; //在根对象下创建D
 D.dialog = {
     tpl: {
@@ -589,3 +589,4 @@ if (typeof define === "function" && define.amd) {
 } else {
     window.D = D;
 }
+export default D;
